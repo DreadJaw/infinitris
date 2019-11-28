@@ -99,7 +99,7 @@ function spawnBlock() {
         }
     }
     // Line clearing
-    for(let row = thisField.length - 1; row >= 0) {
+    for(let row = thisField.length - 1; row >= 0;) {
         if(thisField[row].every((cell) => { !!cell })) {
             // Drop every row above
             for(let r = row; r >= 0; r--) {
@@ -109,6 +109,7 @@ function spawnBlock() {
             row--;
         }
     }
+    thisBlock = fetchNextBlock();
 }
 
 // Setting the Game Pieces in Array format
@@ -170,6 +171,16 @@ let isGameOver = false; // Self defined
 let thisBlock = fetchNextBlock(); // Starting block
 let animFrame = null; // Stored requested action frame
 
+// Keyboard Input
+let keyboard = {
+    KEY_UP: 38,
+    KEY_DOWN: 40,
+    KEY_LEFT: 37,
+    KEY_RIGHT: 39,
+    KEY_SPACE: 32,
+    KEY_R: 82
+}
+
 
 function loop() {
     animFrame = requestAnimationFrame(loop);
@@ -211,6 +222,34 @@ function loop() {
         }
     }
 }
+
+// Keyboard Input
+document.addEventListener('keydown', function(e) {
+    if(isGameOver) { return; }
+    // Moving left and right
+    if(e.which == keyboard.KEY_LEFT || e.which == keyboard.KEY_RIGHT) {
+        let col = (e.which == keyboard.KEY_LEFT) ? thisBlock.col - 1 : thisBlock.col + 1;
+        if(isValidMove(thisBlock.matrix, thisBlock.row, col)) {
+            thisBlock.col = col;
+        }
+    }
+    // Rotation
+    if(e.which == keyboard.KEY_UP) {
+        let newMatrix = rotate(thisBlock.matrix);
+        if(isValidMove(matrix, thisBlock.row, thisBlock.col)) {
+            thisBlock.matrix = matrix;
+        }
+    }
+    // Soft Drop
+    if(e.white == keyboard.KEY_DOWN) {
+        const row = thisBlock.row + 1;
+        if(isValidMove(thisBlock.matrix, row, thisBlock.col)) {
+            thisBlock.row = row - 1;
+            spawnBlock();
+            return;
+        } 
+    }
+})
 
 // Start the damn game
 animFrame = requestAnimationFrame(loop);
