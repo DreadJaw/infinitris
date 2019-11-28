@@ -1,63 +1,9 @@
-// Establishing Variables
-
+// Immediate Variables
 const canvas = document.getElementById('canvas'); // Game Canvas
 const context = canvas.getContext('2d'); // Set Context
 const thisGrid = 32; // Grid Cell Dimension 32x32
 const thisSequence = []; // Game Sequence
-let hexColor = '#ffffff'; // Main color in HEX
-let rgbColor = {r: 255, g: 255, b: 255}; // Main color in RGB
-let highScore = 0; // Self defined
-let level = 1; // Self defined
-let userName = 'Player'; // Players Name
-let speed = 35; // Fall speed
-let count = 0; // Used for timer and speed
-let linesRemaining = 10; // Amount of player lines remaining
-let linesActual = 10; // Total to next level
-let isGameOver = false; // Self defined
-let thisBlock = fetchNextBlock(); // Starting block
-let animFrame = null; // Stored requested action frame
-
-
-const thisField = []; // Every cell in game with 2D Array; 10x20;
-
-// Setting the Game Pieces in Array format
-const thisBlocks = {
-    I: [
-        [0, 0, 0, 0],
-        [1, 1, 1, 1],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ],
-    J: [
-        [1, 0, 0],
-        [1, 1, 1],
-        [0, 0, 0],
-    ],
-    L: [
-        [0, 0, 1],
-        [1, 1, 1],
-        [0, 0, 0]
-    ],
-    O: [
-        [1, 1],
-        [1, 1]
-    ],
-    S: [
-        [0, 1, 1],
-        [1, 1, 0],
-        [0, 0, 0]
-    ],
-    Z: [
-        [1, 1, 0],
-        [0, 1, 1],
-        [0, 0, 0]
-    ],
-    T: [
-        [0, 1, 0],
-        [1, 1, 1],
-        [0, 0, 0]
-    ]
-}
+const thisField = []; // Every cell in game with 2D Array; 10x20;   
 
 // Get random integer between min and max
 function randomNumber(min, max) {
@@ -148,11 +94,71 @@ function spawnBlock() {
                 if(thisBlock.row + row < 0) {
                     return userGameOver();
                 }
-                thisField[thisBlocks.row + row][thisBlock.col + col] = thisBlock.id;
+                thisField[thisBlock.row + row][thisBlock.col + col] = thisBlock.id;
             }
         }
     }
 }
+
+// Setting the Game Pieces in Array format
+const thisBlocks = {
+    I: [
+        [0, 0, 0, 0],
+        [1, 1, 1, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ],
+    J: [
+        [1, 0, 0],
+        [1, 1, 1],
+        [0, 0, 0],
+    ],
+    L: [
+        [0, 0, 1],
+        [1, 1, 1],
+        [0, 0, 0]
+    ],
+    O: [
+        [1, 1],
+        [1, 1]
+    ],
+    S: [
+        [0, 1, 1],
+        [1, 1, 0],
+        [0, 0, 0]
+    ],
+    Z: [
+        [1, 1, 0],
+        [0, 1, 1],
+        [0, 0, 0]
+    ],
+    T: [
+        [0, 1, 0],
+        [1, 1, 1],
+        [0, 0, 0]
+    ]
+}
+// Create Empty State
+for(let row = -2; row < 20; row++) {
+    thisField[row] = [];
+    for(let col = 0; col < 10; col++) {
+        thisField[row][col] = 0;
+    }
+} 
+// Establishing Variables
+let hexColor = '#ffffff'; // Main color in HEX
+let rgbColor = {r: 255, g: 255, b: 255}; // Main color in RGB
+let highScore = 0; // Self defined
+let level = 1; // Self defined
+let userName = 'Player'; // Players Name
+let speed = 35; // Fall speed
+let count = 0; // Used for timer and speed
+let linesRemaining = 10; // Amount of player lines remaining
+let linesActual = 10; // Total to next level
+let isGameOver = false; // Self defined
+let thisBlock = fetchNextBlock(); // Starting block
+let animFrame = null; // Stored requested action frame
+
 
 function loop() {
     animFrame = requestAnimationFrame(loop);
@@ -197,3 +203,4 @@ function loop() {
 
 // Start the damn game
 animFrame = requestAnimationFrame(loop);
+
