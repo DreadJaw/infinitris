@@ -98,6 +98,17 @@ function spawnBlock() {
             }
         }
     }
+    // Line clearing
+    for(let row = thisField.length - 1; row >= 0) {
+        if(thisField[row].every((cell) => { !!cell })) {
+            // Drop every row above
+            for(let r = row; r >= 0; r--) {
+                thisField[r] = thisField[r - 1]
+            }
+        } else {
+            row--;
+        }
+    }
 }
 
 // Setting the Game Pieces in Array format
