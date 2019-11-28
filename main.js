@@ -235,7 +235,7 @@ document.addEventListener('keydown', function(e) {
     }
     // Rotation
     if(e.which == keyboard.KEY_UP) {
-        let newMatrix = rotate(thisBlock.matrix);
+        let matrix = rotate(thisBlock.matrix);
         if(isValidMove(matrix, thisBlock.row, thisBlock.col)) {
             thisBlock.matrix = matrix;
         }
@@ -243,7 +243,7 @@ document.addEventListener('keydown', function(e) {
     // Soft Drop
     if(e.white == keyboard.KEY_DOWN) {
         const row = thisBlock.row + 1;
-        if(isValidMove(thisBlock.matrix, row, thisBlock.col)) {
+        if(!isValidMove(thisBlock.matrix, row, thisBlock.col)) {
             thisBlock.row = row - 1;
             spawnBlock();
             return;
