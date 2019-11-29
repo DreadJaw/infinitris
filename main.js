@@ -80,8 +80,8 @@ function isValidMove(matrix, cellRow, cellCol) {
             if(matrix[row][col] && (
                 // Outside the Game Bounds
                 cellCol + col < 0 ||
-                cellCol + col >= (thisField[0].length - 1) ||
-                cellRow + row >= (thisField.length - 1) ||
+                cellCol + col >= thisField[0].length ||
+                cellRow + row >= thisField.length ||
                 // Conflicts with another block
                 thisField[cellRow + row][cellCol + col])) 
             { isValid = false; }
@@ -105,6 +105,7 @@ function spawnBlock() {
     // Line clearing
     for(let row = thisField.length - 1; row >= 0;) {
         if(thisField[row].every((cell) => { !!cell })) {
+            console.log('Row Clear');
             // Drop every row above
             for(let r = row; r >= 0; r--) {
                 thisField[r] = thisField[r - 1]
