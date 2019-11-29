@@ -102,11 +102,13 @@ function spawnBlock() {
             }
         }
     }
+
     // Line clearing
+    let linesCleared = 0;
     for(let row = thisField.length - 1; row >= 0;) {
-        if(thisField[row].every((cell) => { !!cell })) {
-            console.log('Row Clear');
+        if(thisField[row].every((cell) => !!cell)) {
             // Drop every row above
+            linesCleared++;
             for(let r = row; r >= 0; r--) {
                 thisField[r] = thisField[r - 1]
             }
@@ -114,6 +116,9 @@ function spawnBlock() {
             row--;
         }
     }
+    // If cleared lines then run numbers
+    // clearLines(linesCleared);
+    // Next block spawn
     thisBlock = fetchNextBlock();
 }
 
