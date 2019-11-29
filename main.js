@@ -118,6 +118,12 @@ function clearLines(amount) {
         highScore += amount;
         level += 1;
         setNewColors();
+        for(let row = -2; row < 20; row++) {
+            thisField[row] = [];
+            for(let col = 0; col < 10; col++) {
+                thisField[row][col] = 0;
+            }
+        } 
     } else {
         linesRemaining -= amount;
         highScore += amount;
@@ -317,6 +323,21 @@ document.addEventListener('keydown', function(e) {
         } else {
             thisBlock.row = row;
         }
+    }
+
+    if(e.which == keyboard.KEY_R) {
+        for(let row = -2; row < 20; row++) {
+            thisField[row] = [];
+            for(let col = 0; col < 10; col++) {
+                thisField[row][col] = 0;
+            }
+        }
+        level = 1;
+        hexColor = '#ffffff';
+        rgbColor = {r: 255, g: 255, b: 255};
+        highScore = 0;
+        linesActual = 5;
+        linesRemaining = 5;
     }
 })
 
