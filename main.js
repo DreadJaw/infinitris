@@ -31,6 +31,7 @@ function setNewColors() {
     let hex = hexColorScheme(rgb);
     rgbColor = rgb;
     hexColor = hex;
+    updateUserInterfaceColors();
 }
 
 // Generate a block sequence
@@ -96,15 +97,15 @@ function userGameOver() {
     isGameOver = true;
     
     context.fillStyle = '#000000';
-    context.globalAlpha = 0.75;
-    context.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
+    context.globalAlpha = 0.85;
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
     context.globalAlpha = 1;
     context.fillStyle = hexColor;
-    context.font = '32 Press Start 2P';
+    context.font = '32px "Press Start 2P"';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
-    context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
+    context.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
 }
 
 // Line Clearing
@@ -209,8 +210,8 @@ let level = 1; // Self defined
 let userName = 'Player'; // Players Name
 let speed = 35; // Fall speed
 let count = 0; // Used for timer and speed
-let linesRemaining = 10; // Amount of player lines remaining
-let linesActual = 10; // Total to next level
+let linesRemaining = 5; // Amount of player lines remaining
+let linesActual = 5; // Total to next level
 let isGameOver = false; // Self defined
 let thisBlock = fetchNextBlock(); // Starting block
 let animFrame = null; // Stored requested action frame
@@ -234,6 +235,17 @@ function updateUserInterface() {
     document.getElementById('highScore').innerHTML = addCommas(highScore);
     document.getElementById('linesRemaining').innerHTML = addCommas(linesRemaining);
     document.getElementById('linesTotal').innerHTML = addCommas(linesActual);
+}
+
+function updateUserInterfaceColors() {
+    let borders = document.getElementsByClassName('bd-custom');
+    for(let i = 0; i < borders.length; i++) {
+        borders[i].style.border = '1px solid ' + hexColor;
+    }
+    let texts = document.getElementsByClassName('text-custom');
+    for(let i = 0; i < texts.length; i++) {
+        texts[i].style.color = hexColor;
+    }
 }
 
 function loop() {
