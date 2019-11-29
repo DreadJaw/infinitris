@@ -98,6 +98,7 @@ function clearLines(amount) {
         linesActual = parseInt(linesActual * 1.8);
         linesRemaining = (linesActual - difference);
         highScore += amount;
+        level += 1;
         setNewColors();
     } else {
         linesRemaining -= amount;
@@ -207,6 +208,16 @@ let keyboard = {
     KEY_R: 82
 }
 
+function addCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function updateUserInterface() {
+    document.getElementById('level').innerHTML = addCommas(level);
+    document.getElementById('highScore').innerHTML = addCommas(highScore);
+    document.getElementById('linesRemaining').innerHTML = addCommas(linesRemaining);
+    document.getElementById('linesTotal').innerHTML = addCommas(linesActual);
+}
 
 function loop() {
     animFrame = requestAnimationFrame(loop);
@@ -247,6 +258,7 @@ function loop() {
             }
         }
     }
+    updateUserInterface();
 }
 
 // Keyboard Input
