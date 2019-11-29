@@ -90,6 +90,22 @@ function isValidMove(matrix, cellRow, cellCol) {
     return isValid;
 }
 
+// Line Clearing
+function clearLines(amount) {
+    if(amount == 0) return;
+    if(linesRemaining <= amount) {
+        let difference = (amount - linesRemaining);
+        linesActual = parseInt(linesActual * 1.8);
+        linesRemaining = (linesActual - difference);
+        highScore += amount;
+        setNewColors();
+    } else {
+        linesRemaining -= amount;
+        highScore += amount;
+    }
+}
+
+// Block Dropping and Clearing
 function spawnBlock() {
     for(let row = 0; row < thisBlock.matrix.length; row++) {
         for(let col = 0; col < thisBlock.matrix[row].length; col++) {
@@ -117,7 +133,7 @@ function spawnBlock() {
         }
     }
     // If cleared lines then run numbers
-    // clearLines(linesCleared);
+    clearLines(linesCleared);
     // Next block spawn
     thisBlock = fetchNextBlock();
 }
