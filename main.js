@@ -73,19 +73,21 @@ function rotate(matrix) {
 
 // Check if a movement should work
 function isValidMove(matrix, cellRow, cellCol) {
+    let isValid = true;
     for(let row = 0; row < matrix.length; row++) {
         for(let col = 0; col < matrix[row].length; col++) {
+
             if(matrix[row][col] && (
                 // Outside the Game Bounds
                 cellCol + col < 0 ||
-                cellCol + col >= thisField[0].length ||
-                cellRow + row >= thisField.length ||
+                cellCol + col >= (thisField[0].length - 1) ||
+                cellRow + row >= (thisField.length - 1) ||
                 // Conflicts with another block
                 thisField[cellRow + row][cellCol + col])) 
-            { return false; }
+            { isValid = false; }
         }
     }
-    return true;
+    return isValid;
 }
 
 function spawnBlock() {
