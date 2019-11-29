@@ -252,7 +252,9 @@ document.addEventListener('keydown', function(e) {
             thisBlock.row = row - 1;
             spawnBlock();
             return;
-        } 
+        } else {
+            thisBlock.row = row;
+        }
     }
 })
 
