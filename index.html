@@ -11,14 +11,15 @@ body {
     align-items: center;
     justify-content: center;
 }
-canvas {
-    border: 1px solid white;
-}
+#stats { float: left; height: 640px; width: 320px; }
+#canvas { float: right; }
+.bd-custom { border: 1px solid white }
 </style>
 </head>
 
 <body>
-<canvas id="canvas" height="640" width="320"></canvas>
+<div id="stats" class="bd-custom"></div>
+<canvas id="canvas" class="bd-custom" height="640" width="320"></canvas>
 </body>
 <script src="main.js"></script>
 </html>
