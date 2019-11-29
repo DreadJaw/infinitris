@@ -63,10 +63,12 @@ function fetchNextBlock() {
 // Rotate a block NxN
 function rotate(matrix) {
     const N = (matrix.length - 1);
-    const result = matrix.map((row, i) => {
-        row.map((val, e) => { matrix[N - e][i] })
-    });
-    return result;
+    const result = matrix.map((row, i) => 
+        row.map((val, e) => matrix[N - e][i])
+    );
+    matrix.length = 0;
+    matrix.push(...result);
+    return matrix;
 }
 
 // Check if a movement should work
@@ -241,7 +243,7 @@ document.addEventListener('keydown', function(e) {
         }
     }
     // Soft Drop
-    if(e.white == keyboard.KEY_DOWN) {
+    if(e.which == keyboard.KEY_DOWN) {
         const row = thisBlock.row + 1;
         if(!isValidMove(thisBlock.matrix, row, thisBlock.col)) {
             thisBlock.row = row - 1;
