@@ -4,21 +4,36 @@
 <head>
 <title>Infinitris</title>
 <style type="text/css">
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
 html, body { height: 100%; margin: 0; }
 body {
     background-color: black;
+    font-family: ;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+    font-family: 'Press Start 2P';
 }
-#stats { float: left; height: 640px; width: 320px; }
+#stats { float: left; height: 640px; width: 320px; text-align: center; }
 #canvas { float: right; }
 .bd-custom { border: 1px solid white }
 </style>
 </head>
 
 <body>
-<div id="stats" class="bd-custom"></div>
+<div id="stats" class="bd-custom">
+    <h2 class="text-custom">Infinitris</h2>
+
+    <h3 class="text-custom">Level</h3>
+    <p id="level">1</p>
+
+    <h3 class="text-custom">HighScore</h3>
+    <p id="highScore">0</p>
+
+    <h3 class="text-custom">Lines Remaining</h3>
+    <p><span id="linesRemaining">1</span>/<span id="linesTotal">1</span></p>
+</div>
 <canvas id="canvas" class="bd-custom" height="640" width="320"></canvas>
 </body>
 <script src="main.js"></script>
