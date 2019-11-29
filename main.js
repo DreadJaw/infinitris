@@ -90,6 +90,23 @@ function isValidMove(matrix, cellRow, cellCol) {
     return isValid;
 }
 
+// Game Over
+function userGameOver() {
+    cancelAnimationFrame(animFrame);
+    isGameOver = true;
+    
+    context.fillStyle = '#000000';
+    context.globalAlpha = 0.75;
+    context.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
+
+    context.globalAlpha = 1;
+    context.fillStyle = hexColor;
+    context.font = '32 Press Start 2P';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
+}
+
 // Line Clearing
 function clearLines(amount) {
     if(amount == 0) return;
